@@ -1,6 +1,8 @@
 package br.com.cd2.SBackend.rest;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +23,8 @@ public class CepRestService {
 	private CepService cepService;
 	   
 	@GetMapping(path="/{peso}/{cepOrigem}/{cepDestino}/{nomeDestinatario}")
-	public String getCep(@PathVariable double peso, @PathVariable String cepOrigem, @PathVariable String cepDestino, @PathVariable String nomeDestinatario) {
-
+	public Map<String, String> getCep(@PathVariable double peso, @PathVariable String cepOrigem, @PathVariable String cepDestino, @PathVariable String nomeDestinatario) {
+		HashMap<String, String> map = new HashMap<>();
 		String endOrigem;
 		String endDestino;
 		String dddOrigem;
@@ -75,7 +77,11 @@ public class CepRestService {
 			registro.setCepOrigem(cepOrigem); 
 			registro.setVlTotalFrete(vlTotalFrete);
 			consultasRepository.save(registro);
-			return "Valor do frete : " + vlTotalFrete + "\nData prevista de entrega: " + LocalDate.now().plusDays(1) + "\nCep de origem: " + endereco_Origem.getCep() + "\nCep de destino: " + endereco_Destino.getCep();
+		    map.put("Valor do frete", Double.toString(vlTotalFrete));
+		    map.put("Data prevista de entrega", LocalDate.now().plusDays(1).toString());
+		    map.put("Cep de origem", endereco_Origem.getCep());
+		    map.put("Cep de destino", endereco_Destino.getCep());
+		    return map;
 		}
 		else if (estadoOrigem.equals(estadoDestino))
 		{//Mesmo Estado mas DDDs diferentes
@@ -88,7 +94,11 @@ public class CepRestService {
 			registro.setCepOrigem(cepOrigem); 
 			registro.setVlTotalFrete(vlTotalFrete);
 			consultasRepository.save(registro);
-			return "Valor do frete : " + vlTotalFrete + "\nData prevista de entrega: " + LocalDate.now().plusDays(3) + "\nCep de origem: " + endereco_Origem.getCep() + "\nCep de destino: " + endereco_Destino.getCep();
+		    map.put("Valor do frete", Double.toString(vlTotalFrete));
+		    map.put("Data prevista de entrega", LocalDate.now().plusDays(3).toString());
+		    map.put("Cep de origem", endereco_Origem.getCep());
+		    map.put("Cep de destino", endereco_Destino.getCep());
+		    return map;
 		}
 		else
 		{//Estados diferentes
@@ -101,7 +111,11 @@ public class CepRestService {
 			registro.setCepOrigem(cepOrigem); 
 			registro.setVlTotalFrete(vlTotalFrete);
 			consultasRepository.save(registro);
-			return "Valor total do frete: " + vlTotalFrete + "\nData prevista de entrega: " + LocalDate.now().plusDays(10) + "\nCep de origem: " + endereco_Origem.getCep() + "\nCep de destino: " + endereco_Destino.getCep();
+		    map.put("Valor do frete", Double.toString(vlTotalFrete));
+		    map.put("Data prevista de entrega", LocalDate.now().plusDays(10).toString());
+		    map.put("Cep de origem", endereco_Origem.getCep());
+		    map.put("Cep de destino", endereco_Destino.getCep());
+		    return map;
 		}
 	
 	}
