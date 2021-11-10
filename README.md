@@ -5,7 +5,7 @@ Uso:
 
 	- CEPs com DDDs iguais tem 50% de desconto no valor do frete e entrega prevista de 1 dia
 	- CEPs de estados iguais tem 75% de desconto no valor do frete e entrega prevista de 3 dias
-	- CEPs de estados diferentes não deve ser aplicado o desconto no valor do frete e entrega prevista de 10 dias
+	- CEPs de estados diferentes não têm desconto no valor do frete e entrega prevista de 10 dias
 	O valor do frete é cobrado pelo peso da encomenda, o valor para cada kg é R$ 1,00.
 
 Por exemplo, caso esteja executando o backend em sua máquina local na porta 8080 e a data de consulta foi 10/11/2021:
